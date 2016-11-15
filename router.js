@@ -1,9 +1,38 @@
-// Mongoose Task Model
-const Task = require('../models/task-model')
-// Express Task Router
-const taskRouter = require('express').Router()
+const Url = require('./model')
+const Router = require('express').Router()
 
-taskRouter.route('/')
+Router.route('/new/:url').get((req, res) => {
+    const query = {"originalUrl" : req.params.url}
+    const projection = 'originalUrl shortUrl -_id'
+    Url.findOne(query, projection, (err, url) => {
+      if (err) return next(err)
+      if (url) {
+        return res.json(url)
+      }
+      const newRecord = new Url({originalUrl: req.params.url})
+      newRecord.save()
+      res.json(newRecord)
+    })
+  })
+
+module.exports = Router
+
+/*
+
+Router.route('/new/:url').get((req, res) => {
+  .patch((req, res) => {
+    // findByIdandUpdate doesnt play nice with validation
+    Task.find(req.params.taskId, (err, task) => {
+      for (let field in req.body) { // eslint-disable-line no-unused-vars
+        task.field = req.body.field
+      }
+      if (err) res.status(500).send(err)
+      if (task) res.status(200).save(task)
+      res.status(404).end()
+    })
+  })
+
+Router.route('/')
   // Generic GET
   .get((req, res) => {
     let query = {}
@@ -28,11 +57,11 @@ taskRouter.route('/')
     })
   })
 
-taskRouter.route('/:taskId')
+Router.route('/new/:url')
   // ById GET
   .get((req, res) => {
-    const id = req.params.taskId
-    Task.findById(id, (err, task) => {
+    const url = req.params.url
+    Task.find(id, ({}, task) => {
       if (err) res.status(500).end()
       if (task) res.status(200).json(task)
       res.status(404).end()
@@ -60,5 +89,4 @@ taskRouter.route('/:taskId')
       res.status(404).end()
     })
   })
-
-module.exports = taskRouter
+*/

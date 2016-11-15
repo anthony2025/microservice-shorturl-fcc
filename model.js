@@ -1,13 +1,15 @@
-// load up mongoose and set the promise library to es6
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
+const shortid = require('shortid')
 
-// define our schema, requireds and defaults are to be handled solely here
-// _id is implicit by default on all mongoose schemas
-const taskSchema = mongoose.Schema({
-  title: {type: String, required: true},
-  status: {type: Boolean, default: true}
+const urlSchema = new mongoose.Schema({
+  originalUrl: {type: String, required: true},
+  shortUrl: {type: String, 'default': shortid.generate}
 })
+  // remove the _id of every document before returning the result
+  .set('toJSON', {transform : function (doc, ret) {
+    delete ret._id;
+    return ret;
+  }});
 
-// Convert our schema into a model and make it public
-module.exports = mongoose.model('Task', taskSchema)
+
+module.exports = mongoose.model('Url', urlSchema)
