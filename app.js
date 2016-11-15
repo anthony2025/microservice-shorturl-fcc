@@ -5,7 +5,7 @@ const app = express()
 
 const PORT = process.env.PORT || 4000
 const DBURI = process.env.DBURI || 'mongodb://localhost/urls'
-mongoose.connect(DBURI)
+mongoose.connect(mongodb://anthony:tony2025@ds139567.mlab.com:39567/shorturl)
 
 app.use('/', require('./router'))
 app.get('/', express.static('public'))
