@@ -3,8 +3,8 @@ const express = require('express')
 const dotenv = require('dotenv').config({silent: true});
 const app = express()
 
-const PORT = process.env.PORT
-const DBURI = process.env.DBURI
+const PORT = process.env.PORT || 4000
+const DBURI = process.env.DBURI || 'mongodb://localhost/urls'
 mongoose.connect(DBURI)
 
 app.use('/', require('./router'))
