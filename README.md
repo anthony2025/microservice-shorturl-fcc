@@ -9,10 +9,13 @@ Live at: https://microservice-shorturl-fcc.herokuapp.com/
 * When I visit that shortened URL, it will redirect me to my original link.
 
 ### Example usage
-https://microservice-shorturl-fcc.herokuapp.com/new/http://www.google.com
+https://microservice-shorturl-fcc.herokuapp.com/new/www.google.com
 
 ### Example output
 {
-  "original_url": "http://foo.com:80",
-  "short_url":"https://little-url.herokuapp.com/8170"
+  "original_url": "www.google.com",
+  "short_url": "ryK2f4dZg"
 }
+
+### Then follow
+https://microservice-shorturl-fcc.herokuapp.com/insert-short-url-here
